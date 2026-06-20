@@ -7,9 +7,16 @@
   <nav>
     <a href="/index.html">Home</a>
     <a href="/about.html">About</a>
-    <a href="/activities.html">Activities</a>
-    <a href="/contact.html">Contact</a>
-  
+
+  <div class="dropdown">
+    <a class="dropbtn" href="/activities.html">Activities ▾</a>
+    <div class="dropdown-content">
+      {% for activity in site.activity limit:5 %}
+        <a href="{{ activity.url }}">{{ activity.title }}</a>
+      {% endfor %}
+    </div>
+  </div>
+    
   <div class="dropdown">
     <a class="dropbtn" href="/blogs.html">Blogs ▾</a>
     <div class="dropdown-content">
@@ -18,5 +25,7 @@
       {% endfor %}
     </div>
   </div>
+    
+    <a href="/contact.html">Contact</a>
   </nav>
 </div>
