@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact • My Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Contact information" />
+
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --fg: #111827;
+      --accent: #2563eb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    header {
+      background: var(--card);
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1rem 1.5rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .site-title {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .site-subtitle {
+      margin: 0.15rem 0 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    nav a {
+      margin-left: 1rem;
+      text-decoration: none;
+      color: var(--fg);
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      padding: 0 1.5rem 3rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 2rem 1.75rem;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 2rem;
+    }
+
+    p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .contact-list {
+      margin-top: 1.5rem;
+      padding-left: 1rem;
+    }
+
+    .contact-list li {
+      margin-bottom: 0.6rem;
+      color: var(--fg);
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: #f9fafb;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-inner">
+      <div>
+        <h1 class="site-title">My Website</h1>
+        <p class="site-subtitle">A simple site hosted with GitHub Pages</p>
+      </div>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="activities.html">Activities</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>Contact</h1>
+      <p>If you’d like to get in touch, share feedback, or ask a question, you can use the details below. This page can also include credits or acknowledgements if your project involves multiple contributors.</p>
+
+      <h2>How to Reach Me</h2>
+      <ul class="contact-list">
+        <li>Email: <strong>your-email@example.com</strong></li>
+        <li>Social media or organisation link (optional)</li>
+        <li>GitHub profile (optional)</li>
+      </ul>
+
+      <h2>Credits & Acknowledgements</h2>
+      <p>You can use this section to thank contributors, organisations, or anyone who helped create the content on this site.</p>
+    </div>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> My Website. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
