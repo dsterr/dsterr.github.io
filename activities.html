@@ -15,10 +15,51 @@ title: Activities
   <main>
     <h1>Activities</h1>
     <p>Here you’ll find a collection of activities, resources, and interactive ideas. You can expand this page with links to individual activity pages or downloadable files.</p>
+
+    <div id="filters" class="card" style="margin-bottom: 1.5rem;">
+      <h3>Filter Activities</h3>
     
+      <label>
+        Category:
+        <select id="filter-category">
+          <option value="">All</option>
+          {% assign all_categories = site.activity | map: "categories" | uniq | sort %}
+          {% for group in all_categories %}
+            {% for cat in group %}
+              <option value="{{ cat }}">{{ cat }}</option>
+            {% endfor %}
+          {% endfor %}
+        </select>
+      </label>
+    
+      <label>
+        Difficulty:
+        <select id="filter-difficulty">
+          <option value="">All</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+      </label>
+    
+      <label>
+        Duration:
+        <select id="filter-duration">
+          <option value="">All</option>
+          <option value="Short">Short (0–20 mins)</option>
+          <option value="Medium">Medium (20–45 mins)</option>
+          <option value="Long">Long (45+ mins)</option>
+        </select>
+      </label>
+    </div>
+
     <div class="cards">
       {% for post in site.activity %}
-        <div class="card">
+        <div class="card activity-card"
+             data-category="{{ post.categories | join: ',' }}"
+             data-difficulty="{{ post.difficulty }}"
+             data-duration="{{ post.duration }}">
+          
           <h3>{{ post.title }}</h3>
     
           {% if post.categories %}
@@ -48,5 +89,39 @@ title: Activities
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
+  <script>
+    const cards = document.querySelectorAll('.activity-card');
+  
+    const categoryFilter = document.getElementById('filter-category');
+    const difficultyFilter = document.getElementById('filter-difficulty');
+    const durationFilter = document.getElementById('filter-duration');
+  
+    function applyFilters() {
+      const cat = categoryFilter.value.toLowerCase();
+      const diff = difficultyFilter.value.toLowerCase();
+      const dur = durationFilter.value.toLowerCase();
+  
+      cards.forEach(card => {
+        const cardCat = card.dataset.category.toLowerCase();
+        const cardDiff = card.dataset.difficulty.toLowerCase();
+        const cardDur = card.dataset.duration.toLowerCase();
+  
+        const matchCat = !cat || cardCat.includes(cat);
+        const matchDiff = !diff || cardDiff === diff;
+        const matchDur = !dur || cardDur.includes(dur);
+  
+        if (matchCat && matchDiff && matchDur) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+  
+    categoryFilter.addEventListener('change', applyFilters);
+    difficultyFilter.addEventListener('change', applyFilters);
+    durationFilter.addEventListener('change', applyFilters);
+  </script>
+
 </body>
 </html>
