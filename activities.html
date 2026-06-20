@@ -15,29 +15,16 @@ title: Activities
   <main>
     <h1>Activities</h1>
     <p>Here you’ll find a collection of activities, resources, and interactive ideas. You can expand this page with links to individual activity pages or downloadable files.</p>
-
+    
     <div class="cards">
-
-      <div class="card">
-        <h3>Origami World Tour</h3>
-        <p>A creative activity exploring global cultures through simple origami designs. Great for groups or individual sessions.</p>
-      </div>
-
-      <div class="card">
-        <h3>Environmental Circle</h3>
-        <p>A reflective activity where participants step forward based on environmental habits and choices.</p>
-      </div>
-
-      <div class="card">
-        <h3>Code & Cipher Challenge</h3>
-        <p>Introduce basic cryptography with fun puzzles like Caesar shifts and symbol codes.</p>
-      </div>
-
-      <div class="card">
-        <h3>Team Problem‑Solving</h3>
-        <p>Short challenges that build communication, leadership, and teamwork skills.</p>
-      </div>
-
+      {% for post in site.activity %}
+        <div class="card">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+          <p><a href="{{ post.url }}">Read more →</a></p>
+        </div>
+      {% endfor %}
+  
     </div>
   </main>
 
