@@ -1,58 +1,64 @@
-<div class="header-inner">
-  <div>
-    <h1 class="site-title">My Website</h1>
-    <p class="site-subtitle">A simple site hosted with GitHub Pages</p>
-  </div>
+<header>
+  <div class="header-inner">
 
-  <nav>
-    <a href="/index.html">Home</a>
-    <a href="/about.html">About</a>
+    <!-- Left: Title -->
+    <div class="branding">
+      <h1 class="site-title">My Website</h1>
+      <p class="site-subtitle">A simple site hosted with GitHub Pages</p>
+    </div>
 
-    <div class="dropdown">
-      <a class="dropbtn" href="/activities.html">Activities ▾</a>
-      <div class="dropdown-content">
-        {% assign all_categories = site.activity | map: "categories" | uniq | sort %}
-        {% for group in all_categories %}
-          {% for cat in group %}
-            <a href="/activities.html?category={{ cat | url_encode }}">{{ cat }}</a>
+    <!-- Right: Navigation + Icons -->
+    <nav class="nav-row">
+
+      <a href="/index.html">Home</a>
+      <a href="/about.html">About</a>
+
+      <div class="dropdown">
+        <a class="dropbtn" href="/activities.html">Activities ▾</a>
+        <div class="dropdown-content">
+          {% assign all_categories = site.activity | map: "categories" | uniq | sort %}
+          {% for group in all_categories %}
+            {% for cat in group %}
+              <a href="/activities.html?category={{ cat | url_encode }}">{{ cat }}</a>
+            {% endfor %}
           {% endfor %}
-        {% endfor %}
+        </div>
       </div>
-    </div>
 
-    <div class="dropdown">
-      <a class="dropbtn" href="/blogs.html">Blogs ▾</a>
-      <div class="dropdown-content">
-        {% for post in site.posts limit:5 %}
-          <a href="{{ post.url }}">{{ post.title }}</a>
-        {% endfor %}
+      <div class="dropdown">
+        <a class="dropbtn" href="/blogs.html">Blogs ▾</a>
+        <div class="dropdown-content">
+          {% for post in site.posts limit:5 %}
+            <a href="{{ post.url }}">{{ post.title }}</a>
+          {% endfor %}
+        </div>
       </div>
-    </div>
 
-    <a href="/contact.html">Contact</a>
+      <a href="/contact.html">Contact</a>
 
-    <div class="social-icons">
-      <a href="https://www.linkedin.com/in/drew-sang/" target="_blank" aria-label="LinkedIn">
-        <img src="/images/linkedin.png" alt="LinkedIn logo" class="icon-img">
-      </a>
-    
-      <a href="https://www.facebook.com/drew.sangster.376/" target="_blank" aria-label="Facebook">
-        <img src="/images/facebook.png" alt="Facebook logo" class="icon-img">
-      </a>
-    
-      <a href="https://www.instagram.com/drewster.01/" target="_blank" aria-label="Instagram">
-        <img src="/images/instagram.png" alt="Instagram logo" class="icon-img">
-      </a>
-    </div>
+      <!-- Social Icons -->
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/drew-sang/" target="_blank">
+          <img src="/images/linkedin.png" class="icon-img" alt="LinkedIn">
+        </a>
+        <a href="https://www.facebook.com/drew.sangster.376/" target="_blank">
+          <img src="/images/facebook.png" class="icon-img" alt="Facebook">
+        </a>
+        <a href="https://www.instagram.com/drewster.01/" target="_blank">
+          <img src="/images/instagram.png" class="icon-img" alt="Instagram">
+        </a>
+      </div>
 
-    <div class="search-wrapper">
-      <form class="search-expand" action="/search.html" method="get">
-        <button type="submit" class="search-icon" aria-label="Search">
-          <img src="/images/search.png" alt="Search" class="search-img">
-        </button>
-        <input type="text" name="q" placeholder="Search…" />
-      </form>
-    </div>
+      <!-- Search -->
+      <div class="search-wrapper">
+        <form class="search-expand" action="/search.html" method="get">
+          <button type="submit" class="search-icon" aria-label="Search">
+            <img src="/images/search.png" class="search-img" alt="Search">
+          </button>
+          <input type="text" name="q" placeholder="Search…" />
+        </form>
+      </div>
 
-  </nav>
-</div>
+    </nav>
+  </div>
+</header>
