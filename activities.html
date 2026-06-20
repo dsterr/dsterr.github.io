@@ -41,15 +41,11 @@ title: Activities
           <option value="Hard">Hard</option>
         </select>
       </label>
-    
-      <label>
-        Duration:
-        <select id="filter-duration">
-          <option value="">All</option>
-          <option value="Short">Short (0–20 mins)</option>
-          <option value="Medium">Medium (20–45 mins)</option>
-          <option value="Long">Long (45+ mins)</option>
-        </select>
+      
+      <label style="display:block; margin-top:1rem;">
+        Duration (minutes):
+        <input type="range" id="filter-duration" min="0" max="150" value="150" step="5" />
+        <span id="duration-value">Up to 150 mins</span>
       </label>
     </div>
 
@@ -71,7 +67,7 @@ title: Activities
           {% endif %}
     
           {% if post.duration %}
-            <p><strong>Duration:</strong> {{ post.duration }}</p>
+            <p><strong>Duration:</strong> {{ post.duration }} minutes</p>
           {% endif %}
     
           <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
@@ -95,20 +91,23 @@ title: Activities
     const categoryFilter = document.getElementById('filter-category');
     const difficultyFilter = document.getElementById('filter-difficulty');
     const durationFilter = document.getElementById('filter-duration');
+    const durationValue = document.getElementById('duration-value');
   
     function applyFilters() {
       const cat = categoryFilter.value.toLowerCase();
       const diff = difficultyFilter.value.toLowerCase();
-      const dur = durationFilter.value.toLowerCase();
+      const maxDuration = parseInt(durationFilter.value);
+  
+      durationValue.textContent = `Up to ${maxDuration} mins`;
   
       cards.forEach(card => {
         const cardCat = card.dataset.category.toLowerCase();
         const cardDiff = card.dataset.difficulty.toLowerCase();
-        const cardDur = card.dataset.duration.toLowerCase();
+        const cardDur = parseInt(card.dataset.duration);
   
         const matchCat = !cat || cardCat.includes(cat);
         const matchDiff = !diff || cardDiff === diff;
-        const matchDur = !dur || cardDur.includes(dur);
+        const matchDur = cardDur <= maxDuration;
   
         if (matchCat && matchDiff && matchDur) {
           card.style.display = "block";
@@ -120,8 +119,7 @@ title: Activities
   
     categoryFilter.addEventListener('change', applyFilters);
     difficultyFilter.addEventListener('change', applyFilters);
-    durationFilter.addEventListener('change', applyFilters);
+    durationFilter.addEventListener('input', applyFilters);
   </script>
-
 </body>
 </html>
