@@ -13,79 +13,78 @@ title: Activities
   </header>
 
   <main>
-    <div class="activities-layout">
-    
-      <aside class="filters-sidebar">
-        <h3>Filter Activities</h3>
-    
-        <label>
-          Search:
-          <input type="text" id="filter-search" placeholder="Search activities..." />
-        </label>
-    
-        <button id="clear-filters">Clear Filters</button>
-    
-        <label>
-          Category:
-          <select id="filter-category">
-            <option value="">All</option>
-            {% assign all_categories = site.activity | map: "categories" | uniq | sort %}
-            {% for group in all_categories %}
-              {% for cat in group %}
-                <option value="{{ cat }}">{{ cat }}</option>
-              {% endfor %}
+    <h1>Activities</h1>
+    <p>Here you’ll find a collection of activities, resources, and interactive ideas. You can expand this page with links to individual activity pages or downloadable files.</p>
+
+    <div id="filters" class="card" style="margin-bottom: 1.5rem;">
+      <h3>Filter Activities</h3>
+
+      <label style="margin-right:1.5rem;">
+        Search:
+        <input type="text" id="filter-search" placeholder="Search activities..." />
+      </label>
+
+      <button id="clear-filters" style="margin-left:1rem;">
+        Clear Filters
+      </button>
+
+      <label style="margin-right:1.5rem;">
+        Category:
+        <select id="filter-category">
+          <option value="">All</option>
+          {% assign all_categories = site.activity | map: "categories" | uniq | sort %}
+          {% for group in all_categories %}
+            {% for cat in group %}
+              <option value="{{ cat }}">{{ cat }}</option>
             {% endfor %}
-          </select>
-        </label>
-    
-        <label>
-          Difficulty:
-          <select id="filter-difficulty">
-            <option value="">All</option>
-            <option value="Easy">Easy</option>
-            <option value="Medium">Medium</option>
-            <option value="Hard">Hard</option>
-          </select>
-        </label>
-    
-        <label>
-          Duration (minutes):
-          <input type="range" id="filter-duration" min="0" max="150" value="150" step="5" />
-          <span id="duration-value">Up to 150 mins</span>
-        </label>
-      </aside>
-    
-      <section class="activities-list">
-        <div class="cards">
-          {% for post in site.activity %}
-            <div class="card activity-card"
-                 data-category="{{ post.categories | join: ',' }}"
-                 data-difficulty="{{ post.difficulty }}"
-                 data-duration="{{ post.duration }}"
-                 data-text="{{ post.title | downcase }} {{ post.excerpt | strip_html | downcase }}">
-    
-              <h3>{{ post.title }}</h3>
-    
-              {% if post.categories %}
-                <p><strong>Categories:</strong> {{ post.categories | join: ", " }}</p>
-              {% endif %}
-    
-              {% if post.difficulty %}
-                <p><strong>Difficulty:</strong> {{ post.difficulty }}</p>
-              {% endif %}
-    
-              {% if post.duration %}
-                <p><strong>Duration:</strong> {{ post.duration }} minutes</p>
-              {% endif %}
-    
-              <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
-    
-              <p><a href="{{ post.url }}">Read more →</a></p>
-            </div>
           {% endfor %}
+        </select>
+      </label>
+
+      <label style="margin-right:1.5rem;">
+        Difficulty:
+        <select id="filter-difficulty">
+          <option value="">All</option>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+      </label>
+
+      <label style="margin-right:1.5rem;">
+        Duration (minutes):
+        <input type="range" id="filter-duration" min="0" max="150" value="150" step="5" />
+        <span id="duration-value">Up to 150 mins</span>
+      </label>
+    </div>
+
+    <div class="cards">
+      {% for post in site.activity %}
+        <div class="card activity-card"
+             data-category="{{ post.categories | join: ',' }}"
+             data-difficulty="{{ post.difficulty }}"
+             data-duration="{{ post.duration }}"
+             data-text="{{ post.title | downcase }} {{ post.excerpt | strip_html | downcase }}">
+
+          <h3>{{ post.title }}</h3>
+
+          {% if post.categories %}
+            <p><strong>Categories:</strong> {{ post.categories | join: ", " }}</p>
+          {% endif %}
+
+          {% if post.difficulty %}
+            <p><strong>Difficulty:</strong> {{ post.difficulty }}</p>
+          {% endif %}
+
+          {% if post.duration %}
+            <p><strong>Duration:</strong> {{ post.duration }} minutes</p>
+          {% endif %}
+
+          <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+
+          <p><a href="{{ post.url }}">Read more →</a></p>
         </div>
-      </section>
-    
+      {% endfor %}
     </div>
   </main>
 
@@ -99,44 +98,44 @@ title: Activities
 
   <script>
     const cards = document.querySelectorAll('.activity-card');
-  
+
     const categoryFilter = document.getElementById('filter-category');
     const difficultyFilter = document.getElementById('filter-difficulty');
     const durationFilter = document.getElementById('filter-duration');
     const durationValue = document.getElementById('duration-value');
     const searchFilter = document.getElementById('filter-search');
     const clearBtn = document.getElementById('clear-filters');
-  
+
     function applyFilters() {
       const cat = categoryFilter.value.toLowerCase();
       const diff = difficultyFilter.value.toLowerCase();
       const maxDuration = parseInt(durationFilter.value);
       const search = searchFilter.value.toLowerCase();
-  
+
       durationValue.textContent = `Up to ${maxDuration} mins`;
-  
+
       cards.forEach(card => {
         const cardCat = card.dataset.category.toLowerCase();
         const cardDiff = card.dataset.difficulty.toLowerCase();
         const cardDur = parseInt(card.dataset.duration);
         const cardText = card.dataset.text;
-  
+
         const matchCat = !cat || cardCat.includes(cat);
         const matchDiff = !diff || cardDiff === diff;
         const matchDur = cardDur <= maxDuration;
         const matchSearch = !search || cardText.includes(search);
-  
+
         const visible = matchCat && matchDiff && matchDur && matchSearch;
-  
+
         card.style.display = visible ? "block" : "none";
       });
     }
-  
+
     categoryFilter.addEventListener('change', applyFilters);
     difficultyFilter.addEventListener('change', applyFilters);
     durationFilter.addEventListener('input', applyFilters);
     searchFilter.addEventListener('input', applyFilters);
-  
+
     clearBtn.addEventListener('click', () => {
       categoryFilter.value = "";
       difficultyFilter.value = "";
