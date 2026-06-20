@@ -12,34 +12,22 @@ title: Blogs
     {% include header.html %}
   </header>
 
-  <main>
+<main>
   <h1>Blogs</h1>
-  <p>
-    Browse all blog posts below. Each post includes a title, short summary, and link to the full article.
-  </p>
+  <p>Browse all blog posts below. New posts appear automatically.</p>
 
   <div class="cards">
 
-    <div class="card">
-      <h3>Blog Post 1</h3>
-      <p>A short introduction to the first blog post. Click to read more.</p>
-      <p><a href="blog-post-1.html">Read more →</a></p>
-    </div>
-
-    <div class="card">
-      <h3>Blog Post 2</h3>
-      <p>A brief summary of the second blog post. Click to continue reading.</p>
-      <p><a href="blog-post-2.html">Read more →</a></p>
-    </div>
-
-    <div class="card">
-      <h3>Blog Post 3</h3>
-      <p>A quick overview of the third blog entry. Click to open the full post.</p>
-      <p><a href="blog-post-3.html">Read more →</a></p>
-    </div>
+    {% for post in site.posts %}
+      <div class="card">
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+        <p><a href="{{ post.url }}">Read more →</a></p>
+      </div>
+    {% endfor %}
 
   </div>
-  </main>
+</main>
 
   <footer>
     {% include footer.html %}
