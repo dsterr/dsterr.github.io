@@ -1,0 +1,52 @@
+---
+title: Blogs
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% include head.html %}
+</head>
+
+<body>
+  <header>
+    {% include header.html %}
+  </header>
+
+  <main>
+  <h1>Blogs</h1>
+  <p>
+    Browse all blog posts below. Each post includes a title, short summary, and link to the full article.
+  </p>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Blog Post 1</h3>
+      <p>A short introduction to the first blog post. Click to read more.</p>
+      <p><a href="blog-post-1.html">Read more →</a></p>
+    </div>
+
+    <div class="card">
+      <h3>Blog Post 2</h3>
+      <p>A brief summary of the second blog post. Click to continue reading.</p>
+      <p><a href="blog-post-2.html">Read more →</a></p>
+    </div>
+
+    <div class="card">
+      <h3>Blog Post 3</h3>
+      <p>A quick overview of the third blog entry. Click to open the full post.</p>
+      <p><a href="blog-post-3.html">Read more →</a></p>
+    </div>
+
+  </div>
+  </main>
+
+  <footer>
+    {% include footer.html %}
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
