@@ -98,6 +98,22 @@ title: Activities
   </script>
 
   <script>
+    // Auto-apply category filter from URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryFromURL = urlParams.get("category");
+  
+    if (categoryFromURL) {
+      const categoryFilter = document.getElementById("filter-category");
+      categoryFilter.value = categoryFromURL;
+  
+      // Apply filters immediately
+      window.addEventListener("DOMContentLoaded", () => {
+        applyFilters();
+      });
+    }
+  </script>
+
+  <script>
     const cards = document.querySelectorAll('.activity-card');
 
     const categoryFilter = document.getElementById('filter-category');
