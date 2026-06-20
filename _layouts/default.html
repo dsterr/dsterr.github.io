@@ -319,6 +319,29 @@
       float: right;
       cursor: pointer;
     }
+
+    .social-icons {
+      display: inline-flex;
+      gap: 0.6rem;
+      margin-left: 1rem;
+      align-items: center;
+    }
+    
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+    }
+    
+    .social-icons .icon {
+      width: 20px;
+      height: 20px;
+      fill: var(--fg);
+      transition: fill 0.15s;
+    }
+    
+    .social-icons a:hover .icon {
+      fill: var(--accent);
+    }
   </style>
 </head>
 
