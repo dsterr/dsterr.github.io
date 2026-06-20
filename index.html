@@ -38,6 +38,14 @@
       z-index: 10;
     }
 
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
     .site-title {
       margin: 0;
       font-size: 1.4rem;
@@ -161,7 +169,7 @@
 </head>
 <body>
   <header>
-    <div>
+    <div class="header-inner">
       <h1 class="site-title">Drew Sangster</h1>
       <p class="site-subtitle">A place for forward thinking, curiosity and creativity</p>
     </div>
