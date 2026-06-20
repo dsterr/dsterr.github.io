@@ -20,11 +20,24 @@ title: Activities
       {% for post in site.activity %}
         <div class="card">
           <h3>{{ post.title }}</h3>
+    
+          {% if post.categories %}
+            <p><strong>Categories:</strong> {{ post.categories | join: ", " }}</p>
+          {% endif %}
+    
+          {% if post.difficulty %}
+            <p><strong>Difficulty:</strong> {{ post.difficulty }}</p>
+          {% endif %}
+    
+          {% if post.duration %}
+            <p><strong>Duration:</strong> {{ post.duration }}</p>
+          {% endif %}
+    
           <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+    
           <p><a href="{{ post.url }}">Read more →</a></p>
         </div>
       {% endfor %}
-  
     </div>
   </main>
 
