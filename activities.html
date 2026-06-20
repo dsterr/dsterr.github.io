@@ -18,7 +18,16 @@ title: Activities
 
     <div id="filters" class="card" style="margin-bottom: 1.5rem;">
       <h3>Filter Activities</h3>
-
+    
+      <label style="margin-right:1.5rem;">
+        Search:
+        <input type="text" id="filter-search" placeholder="Search activities..." />
+      </label>
+    
+      <button id="clear-filters" style="margin-left:1rem;">
+        Clear Filters
+      </button>
+    
       <label style="margin-right:1.5rem;">
         Category:
         <select id="filter-category">
@@ -31,7 +40,7 @@ title: Activities
           {% endfor %}
         </select>
       </label>
-
+    
       <label style="margin-right:1.5rem;">
         Difficulty:
         <select id="filter-difficulty">
@@ -41,7 +50,7 @@ title: Activities
           <option value="Hard">Hard</option>
         </select>
       </label>
-
+    
       <label style="margin-right:1.5rem;">
         Duration (minutes):
         <input type="range" id="filter-duration" min="0" max="150" value="150" step="5" />
@@ -52,9 +61,10 @@ title: Activities
     <div class="cards">
       {% for post in site.activity %}
         <div class="card activity-card"
-             data-category="{{ post.categories | join: ',' }}"
-             data-difficulty="{{ post.difficulty }}"
-             data-duration="{{ post.duration }}">
+           data-category="{{ post.categories | join: ',' }}"
+           data-difficulty="{{ post.difficulty }}"
+           data-duration="{{ post.duration }}"
+           data-text="{{ post.title | downcase }} {{ post.excerpt | strip_html | downcase }}">
           
           <h3>{{ post.title }}</h3>
 
@@ -88,38 +98,51 @@ title: Activities
 
   <script>
     const cards = document.querySelectorAll('.activity-card');
-
+  
     const categoryFilter = document.getElementById('filter-category');
     const difficultyFilter = document.getElementById('filter-difficulty');
     const durationFilter = document.getElementById('filter-duration');
     const durationValue = document.getElementById('duration-value');
-
+    const searchFilter = document.getElementById('filter-search');
+    const clearBtn = document.getElementById('clear-filters');
+  
     function applyFilters() {
       const cat = categoryFilter.value.toLowerCase();
       const diff = difficultyFilter.value.toLowerCase();
       const maxDuration = parseInt(durationFilter.value);
-
+      const search = searchFilter.value.toLowerCase();
+  
       durationValue.textContent = `Up to ${maxDuration} mins`;
-
+  
       cards.forEach(card => {
         const cardCat = card.dataset.category.toLowerCase();
         const cardDiff = card.dataset.difficulty.toLowerCase();
         const cardDur = parseInt(card.dataset.duration);
-
+        const cardText = card.dataset.text;
+  
         const matchCat = !cat || cardCat.includes(cat);
         const matchDiff = !diff || cardDiff === diff;
         const matchDur = cardDur <= maxDuration;
-
-        const visible = matchCat && matchDiff && matchDur;
-
-      card.style.display = visible ? "block" : "none";
-
+        const matchSearch = !search || cardText.includes(search);
+  
+        const visible = matchCat && matchDiff && matchDur && matchSearch;
+  
+        card.style.display = visible ? "block" : "none";
       });
     }
-
+  
     categoryFilter.addEventListener('change', applyFilters);
     difficultyFilter.addEventListener('change', applyFilters);
     durationFilter.addEventListener('input', applyFilters);
+    searchFilter.addEventListener('input', applyFilters);
+  
+    clearBtn.addEventListener('click', () => {
+      categoryFilter.value = "";
+      difficultyFilter.value = "";
+      durationFilter.value = durationFilter.max;
+      searchFilter.value = "";
+      applyFilters();
+    });
   </script>
 
 </body>
