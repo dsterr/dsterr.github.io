@@ -42,6 +42,31 @@ layout: default
 
 </article>
 
+<a href="/activities.html" id="floating-back">
+  ← Back
+</a>
+
+<script>
+  // If user came from the Activities page (with filters), return them there
+  if (document.referrer && document.referrer.includes("/activities")) {
+    document.getElementById("floating-back").href = document.referrer;
+  }
+</script>
+
+<!-- Back Button -->
+<div style="margin-bottom: 1.5rem;">
+  <a href="/activities.html" id="back-button" style="text-decoration:none; color: var(--accent);">
+    ← Back to Activities
+  </a>
+</div>
+
+<script>
+  // If user has a history entry, use it
+  if (document.referrer && document.referrer.includes("/activities")) {
+    document.getElementById("back-button").setAttribute("href", document.referrer);
+  }
+</script>
+
 <!-- Navigation -->
 <div style="margin-top: 2rem; display: flex; justify-content: space-between;">
 
