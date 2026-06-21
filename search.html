@@ -66,12 +66,23 @@ title: Search
           resultsDiv.innerHTML = '';
           return;
         }
-
+      
         const results = idx.search(query);
-
+      
+        if (results.length === 0) {
+          resultsDiv.innerHTML = `
+            <div class="card" style="padding:1.25rem; margin-top:1rem;">
+              <p style="margin:0; color:var(--muted);">
+                No results found for "<strong>${query}</strong>".
+              </p>
+            </div>
+          `;
+          return;
+        }
+      
         resultsDiv.innerHTML = results.map(result => {
           const item = documents.find(d => d.url === result.ref);
-
+      
           return `
             <a href="${item.url}" class="card activity-link" style="margin-bottom:1rem; display:block;">
               <h3>${item.title}</h3>
@@ -80,5 +91,4 @@ title: Search
           `;
         }).join('');
       }
-    });
 </script>
