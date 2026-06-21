@@ -6,17 +6,33 @@
 
   <style>
 /* -------------------------------------------------------
-   ROOT + GLOBAL
+   ROOT + GLOBAL (LIGHT MODE)
 ------------------------------------------------------- */
 
 :root {
-  --bg: #FEFAE9;        /* Soft Cream */
+  --bg: #FAF9F7;        /* Soft White */
   --fg: #0F1A18;        /* Darker forest for readability */
   --accent: #7A5C78;    /* Dusty Plum */
   --card: #E8F1EE;      /* Pale moss green (logo-derived) */
   --muted: #8E8AA0;     /* Darker lavender-grey */
   --radius: 12px;
 }
+
+/* -------------------------------------------------------
+   DARK MODE OVERRIDES
+------------------------------------------------------- */
+
+html[data-theme="dark"] {
+  --bg: #121314;        /* Deep charcoal */
+  --fg: #E8F1EE;        /* Pale moss green text */
+  --accent: #C9A6D0;    /* Soft plum accent */
+  --card: #1C1D1F;      /* Dark card surface */
+  --muted: #AFA8BD;     /* Lavender-grey muted text */
+}
+
+/* -------------------------------------------------------
+   GLOBAL ELEMENTS
+------------------------------------------------------- */
 
 * { box-sizing: border-box; }
 
@@ -249,7 +265,7 @@ main {
 }
 
 /* -------------------------------------------------------
-   HERO (UPDATED LAYOUT)
+   HERO
 ------------------------------------------------------- */
 
 .hero {
@@ -520,6 +536,24 @@ footer {
   font-size: 0.85rem;
   color: var(--muted);
   background: #f9fafb;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.theme-toggle:hover {
+  background: #684a66;
+  transform: translateY(-1px);
 }
 
 /* -------------------------------------------------------
