@@ -41,16 +41,22 @@
 
   <!-- CUSTOM DROPDOWN LANGUAGE SWITCHER -->
   <script>
+    function triggerTranslate(lang) {
+      const interval = setInterval(() => {
+        const select = document.querySelector("select.goog-te-combo");
+        if (select) {
+          select.value = lang;
+          select.dispatchEvent(new Event("change"));
+          clearInterval(interval);
+        }
+      }, 200);
+    }
+  
     document.querySelectorAll('.translate-dropdown .dropdown-content a')
       .forEach(item => {
         item.addEventListener('click', function (e) {
           e.preventDefault();
-          const lang = this.getAttribute('data-lang');
-          const select = document.querySelector('select.goog-te-combo');
-          if (select) {
-            select.value = lang;
-            select.dispatchEvent(new Event('change'));
-          }
+          triggerTranslate(this.getAttribute('data-lang'));
         });
       });
   </script>
