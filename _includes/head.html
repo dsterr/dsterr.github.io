@@ -11,10 +11,10 @@
 
 :root {
   --bg: #FAF9F7;        /* Soft White */
-  --fg: #1E2D28;        /* Deep Forest */
+  --fg: #0F1A18;        /* Deep readable forest */
   --accent: #7A5C78;    /* Dusty Plum */
-  --card: #ffffff;      /* Clean white */
-  --muted: #C9C6D2;     /* Lavender Grey */
+  --card: #E8F1EE;      /* Pale moss green (logo-derived) */
+  --muted: #8E8AA0;     /* Darker lavender-grey */
   --radius: 12px;
 }
 
@@ -44,7 +44,7 @@ p {
 
 header {
   background: var(--card);
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #d8e3df;
   padding: 1rem 1.5rem;
   position: sticky;
   top: 0;
@@ -64,6 +64,7 @@ header {
   margin: 0;
   font-size: 1.4rem;
   font-weight: 700;
+  color: var(--fg);
 }
 
 .site-subtitle {
@@ -81,14 +82,6 @@ header {
   align-items: center;
   gap: 1rem;
   flex-wrap: nowrap;
-  white-space: nowrap;
-}
-
-.nav-row a,
-.nav-row .dropdown,
-.social-icons,
-.search-wrapper {
-  flex-shrink: 0;
   white-space: nowrap;
 }
 
@@ -126,7 +119,7 @@ nav a:hover {
   right: 0;
   background: var(--card);
   min-width: 180px;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+  box-shadow: 0 10px 25px rgba(122, 92, 120, 0.15);
   border-radius: var(--radius);
   padding: 0.5rem 0;
   z-index: 20;
@@ -195,6 +188,12 @@ nav a:hover {
   flex-shrink: 0;
 }
 
+.search-expand:hover,
+.search-expand:focus-within {
+  border-color: #c8d2cf;
+  background: #fff;
+}
+
 .search-expand input {
   width: 0;
   opacity: 0;
@@ -203,13 +202,6 @@ nav a:hover {
   margin-left: 0.3rem;
   font-size: 0.9rem;
   transition: all 0.25s ease;
-  line-height: 1;
-}
-
-.search-expand:hover,
-.search-expand:focus-within {
-  border-color: #d1d5db;
-  background: #fff;
 }
 
 .search-expand:hover input,
@@ -217,25 +209,6 @@ nav a:hover {
   width: 140px;
   opacity: 1;
   padding: 0.35rem 0.5rem;
-}
-
-.search-icon {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.search-img {
-  width: 20px;
-  height: 20px;
-  opacity: 0.9;
-  transition: opacity 0.2s ease;
-}
-
-.search-expand:hover .search-img,
-.search-expand:focus-within .search-img {
-  opacity: 1;
 }
 
 /* -------------------------------------------------------
@@ -256,55 +229,16 @@ main {
   background: var(--card);
   border-radius: var(--radius);
   padding: 2rem 1.75rem;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 18px 45px rgba(122, 92, 120, 0.08);
   margin-bottom: 2rem;
 }
 
-.hero-inner {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.hero-content {
-  flex: 1;
-}
-
-.hero-visual {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-}
-
-.hero-visual img {
-  max-width: 100%;
-  height: 320px;
-  border-radius: 8px;
-}
-
 .hero h1 {
-  margin-top: 0;
-  font-size: 2rem;
+  color: var(--fg);
 }
 
 .hero p {
-  margin-bottom: 0.75rem;
   color: var(--muted);
-}
-
-.hero .cta {
-  margin-top: 1.25rem;
-}
-
-@media (max-width: 768px) {
-  .hero-inner {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .hero-visual {
-    order: -1;
-  }
 }
 
 /* -------------------------------------------------------
@@ -335,18 +269,8 @@ main {
    SECTIONS + CARDS
 ------------------------------------------------------- */
 
-.section {
-  margin-bottom: 2rem;
-}
-
-.section h2 {
-  margin-bottom: 0.5rem;
-  font-size: 1.4rem;
-}
-
 .section p {
   color: var(--muted);
-  margin-top: 0;
 }
 
 .cards {
@@ -360,39 +284,18 @@ main {
   background: var(--card);
   border-radius: var(--radius);
   padding: 1.25rem 1.2rem;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 10px 30px rgba(122, 92, 120, 0.06);
 }
 
 .card h3 {
   margin-top: 0;
-  margin-bottom: 0.4rem;
-  font-size: 1.05rem;
+  color: var(--fg);
 }
 
 .card p {
   margin: 0;
   font-size: 0.92rem;
   color: var(--muted);
-}
-
-/* -------------------------------------------------------
-   ACTIVITY FILTERING
-------------------------------------------------------- */
-
-.activity-card {
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  opacity: 1;
-  transform: scale(1);
-}
-
-.activity-card.hidden {
-  opacity: 0;
-  transform: scale(0.98);
-  pointer-events: none;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden;
 }
 
 /* -------------------------------------------------------
@@ -409,120 +312,21 @@ main {
   margin-bottom: 1rem;
 }
 
-.filter-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
-  z-index: 900;
-}
-
-.filter-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.filter-drawer {
-  position: fixed;
-  top: 0;
-  right: -350px;
-  width: 320px;
-  height: 100vh;
-  background: var(--card);
-  padding: 1.5rem;
-  box-shadow: -4px 0 12px rgba(0,0,0,0.15);
-  transition: right 0.3s ease;
-  z-index: 1000;
-  overflow-y: auto;
-}
-
-.filter-drawer.active {
-  right: 0;
-}
-
-.filter-drawer label {
-  display: block;
-  margin-bottom: 1rem;
-}
-
-.filter-drawer input,
-.filter-drawer select {
-  width: 100%;
-  margin-top: 0.25rem;
-}
-
-.clear-btn {
-  width: 100%;
-  margin: 0.5rem 0 1rem 0;
-}
-
-.close-btn {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  float: right;
-  cursor: pointer;
-}
-
-/* -------------------------------------------------------
-   BLOG
-------------------------------------------------------- */
-
-.blog-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
-
-.blog-link:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
-  background: #ffffff;
-  transition: 0.4s ease;
-}
-
-.blog-card img {
-  object-fit: cover;
-  max-height: 160px;
-}
-
-/* -------------------------------------------------------
-   SPRITE + LOGO
-------------------------------------------------------- */
-
-.sprite-logo {
-  height: 72px;
-  vertical-align: middle;
-}
-
-.logo-flex {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.text-block {
-  display: flex;
-  flex-direction: column;
-}
-
 /* -------------------------------------------------------
    FOOTER
 ------------------------------------------------------- */
 
 footer {
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid #d8e3df;
   padding: 1.5rem;
   text-align: center;
   font-size: 0.85rem;
   color: var(--muted);
-  background: #f9fafb;
+  background: #f4f6f5;
 }
 
 /* -------------------------------------------------------
-   MISC
+   FLOATING BACK BUTTON
 ------------------------------------------------------- */
 
 #floating-back {
@@ -533,7 +337,7 @@ footer {
   color: var(--accent);
   padding: 0.55rem 1rem;
   border-radius: 999px;
-  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 6px 18px rgba(122, 92, 120, 0.12);
   text-decoration: none;
   font-weight: 600;
   z-index: 999;
@@ -542,10 +346,7 @@ footer {
 
 #floating-back:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.18);
+  box-shadow: 0 10px 28px rgba(122, 92, 120, 0.18);
 }
 
-#gtranslate_wrapper {
-  display: none !important;
-}
 </style>
