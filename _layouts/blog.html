@@ -24,6 +24,18 @@ layout: default
 
 </article>
 
+<!-- Back Button -->
+<a href="/activities.html" id="floating-back">
+  ← Back
+</a>
+
+<script>
+  // If user came from the Activities page (with filters), return them there
+  if (document.referrer && document.referrer.includes("/activities")) {
+    document.getElementById("floating-back").href = document.referrer;
+  }
+</script>
+
 <!-- Next / Previous Navigation -->
 <div style="margin-top: 2rem; display: flex; justify-content: space-between;">
 
