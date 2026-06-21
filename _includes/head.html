@@ -392,13 +392,21 @@ main {
   color: var(--muted);
 }
 
-/* ⭐ REMOVE UNDERLINES FROM CARD LINKS */
+/* Remove underline from card links */
 .activity-link,
 .activity-link:hover,
 .card a,
 .card a:hover {
   text-decoration: none;
   color: inherit;
+}
+
+/* Match blog hover animation */
+.activity-link:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+  background: #ffffff;
+  transition: 0.4s ease;
 }
 
 /* -------------------------------------------------------
