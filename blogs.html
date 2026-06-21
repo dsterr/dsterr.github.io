@@ -17,16 +17,37 @@ title: Blogs
   <p>Browse all blog posts below. New posts appear automatically.</p>
 
   <div class="cards">
-      
     {% for post in site.posts %}
       <a href="{{ post.url }}" class="card blog-card blog-link"
          data-text="{{ post.title | downcase }} {{ post.excerpt | strip_html | downcase }}">
+  
+        <!-- Thumbnail -->
+        {% if post.image %}
+          <img src="{{ post.image }}" alt="{{ post.title }}"
+               style="width:100%; border-radius: var(--radius); margin-bottom: 1rem;">
+        {% endif %}
+  
         <h3>{{ post.title }}</h3>
+  
+        <!-- Theme / Category -->
+        {% if post.theme %}
+          <p><strong>Theme:</strong> {{ post.theme }}</p>
+        {% endif %}
+  
+        <!-- Estimated reading time -->
+        {% assign words = post.content | number_of_words %}
+        {% assign minutes = words | divided_by:200 | ceil %}
+        <p class="post-meta" style="color: var(--muted); margin-top:-0.5rem;">
+          {{ minutes }} min read
+        </p>
+  
         <p>{{ post.excerpt | strip_html | truncate: 120 }}</p>
+  
       </a>
     {% endfor %}
-
+  
   </div>
+
 </main>
 
   <footer>
